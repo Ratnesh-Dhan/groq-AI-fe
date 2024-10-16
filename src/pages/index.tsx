@@ -1,20 +1,19 @@
 import axios from 'axios';
-import Groq from 'groq-sdk';
 import React, { useState } from 'react'
 
-const index = () => {
-  const [input,  setInput] = React.useState('');
-  const [promt, setPromt] = useState("");
-  const key = "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";
- 
+const Index = () => {
+  const [input, setInput] = React.useState('');
+  const [prompt, setPrompt] = useState("");
 
   const handleClick = () => {
-
-
     // Make a POST request using axios
-    axios.post('http://localhost:3001/submit', {
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
       email: input,
-      prompt: promt
+      prompt: prompt
+    }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(response => {
       console.log('Response:', response.data);
@@ -22,8 +21,7 @@ const index = () => {
     })
     .catch(error => {
       console.error('Error:', error);
-    })
-    
+    });
   }
 
   return (
@@ -42,22 +40,19 @@ const index = () => {
         <textarea
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
           placeholder='Prompt'
-          onChange={(e) => setPromt(e.target.value)}
-          value={promt}
+          onChange={(e) => setPrompt(e.target.value)}
+          value={prompt}
           rows={4}
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           onClick={handleClick}
         >
-          Ask Groq
+          Ask AI
         </button>
       </div>
     </div>
   )
 }
 
-
-
-export default index
-
+export default Index
