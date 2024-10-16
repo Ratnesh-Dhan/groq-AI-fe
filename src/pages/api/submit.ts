@@ -17,10 +17,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         })
         .then(response => {
           console.log('Response:', response.data);
-          // Handle the response here
+          // Send success response to the client
+          res.status(200).json({ message: 'Submission successful', data: response.data });
         })
         .catch(error => {
           console.error('Error:', error);
+          res.status(500).json({ message: 'Submission failed', error: error.message });
         });
       
     } else {

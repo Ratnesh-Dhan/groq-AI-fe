@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const Index = () => {
-  const [input, setInput] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [prompt, setPrompt] = useState("");
 
   const handleClick = () => {
     axios.post(`/api/submit`, {
-      email: input,
+      email: email,
       prompt: prompt
     }, {
       headers: {
@@ -17,10 +17,13 @@ const Index = () => {
     })
     .then(response => {
       console.log('Response:', response.data);
-      // Handle the response here
+      toast.success("Answer sent to mail.");
+      setEmail("");
+      setPrompt("");
     })
     .catch(error => {
       console.error('Error:', error);
+      toast.error("Something went wrong! Try again");
     });
   }
 
@@ -34,8 +37,8 @@ const Index = () => {
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
           placeholder='Email'
-          onChange={(e) => setInput(e.target.value)}
-          value={input}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <textarea
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
