@@ -7,6 +7,16 @@ const Index = () => {
   const [prompt, setPrompt] = useState("");
 
   const handleClick = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      setEmail("");
+      return;
+    }
+    if (!prompt.trim()) {
+      toast.error("Please enter a prompt");
+      return;
+    }
     axios.post(`/api/submit`, {
       email: email,
       prompt: prompt
