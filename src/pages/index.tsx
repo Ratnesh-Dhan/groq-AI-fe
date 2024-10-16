@@ -7,7 +7,23 @@ const Index = () => {
 
   const handleClick = () => {
     // Make a POST request using axios
-    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
+    // axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
+    //   email: input,
+    //   prompt: prompt
+    // }, {
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // })
+    // .then(response => {
+    //   console.log('Response:', response.data);
+    //   // Handle the response here
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
+
+    axios.post(`/api/submit`, {
       email: input,
       prompt: prompt
     }, {
