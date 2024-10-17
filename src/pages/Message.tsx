@@ -12,13 +12,14 @@ const Message = () => {
             toast.error("Please enter a prompt");
             return;
         }
-        axios.post('http://localhost:3001/message', {
+        axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/message`, {
           prompt: prompt,
         }).then((response)=> {
-          toast.success("works");
+          toast.success("Prompt generated successfully");
           setMessage(response.data.result);
           console.log(response.data);
         }).catch((e)=>{
+          toast.error("something went wrong.")
           console.log(e.message);
         });
     }
