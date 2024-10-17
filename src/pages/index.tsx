@@ -21,6 +21,8 @@ const Index = () => {
     //   email: email,
     //   prompt: prompt
     // })
+
+     
     axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
       email: email,
       prompt: prompt
