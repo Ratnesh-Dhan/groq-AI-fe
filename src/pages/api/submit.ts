@@ -10,10 +10,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
           email: email,
           prompt: prompt
-        }, {
-          headers: {
-            'Access-Control-Allow-Origin': '*'
-          }
         })
         .then(response => {
           console.log('Response:', response.data);

@@ -17,13 +17,13 @@ const Index = () => {
       toast.error("Please enter a prompt");
       return;
     }
-    axios.post(`/api/submit`, {
+    // axios.post(`/api/submit`, {
+    //   email: email,
+    //   prompt: prompt
+    // })
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/submit`, {
       email: email,
       prompt: prompt
-    }, {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
     })
     .then(response => {
       console.log('Response:', response.data);
